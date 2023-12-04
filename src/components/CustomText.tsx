@@ -28,7 +28,8 @@ interface PropTypes {
   color: string,
   fontSize: string,
   fontWeight: string,
-  style: StyleProp<TextStyle>
+  style: StyleProp<TextStyle>,
+  children: React.ReactNode;
 }
 
 const CustomText = ({color, fontSize, fontWeight, style, ...props}: PropTypes) => {
