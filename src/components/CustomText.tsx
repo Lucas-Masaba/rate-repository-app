@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
 });
 
 interface PropTypes {
-  color: string,
-  fontSize: string,
-  fontWeight: string,
-  style: StyleProp<TextStyle>,
-  children: React.ReactNode;
+  color?: string,
+  fontSize?: string,
+  fontWeight?: string,
+  style?: StyleProp<TextStyle>,
+  children?: React.ReactNode;
 }
 
 const CustomText = ({color, fontSize, fontWeight, style, ...props}: PropTypes) => {
