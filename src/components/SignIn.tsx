@@ -2,6 +2,16 @@ import React from 'react';
 import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
 import { View, Button, GestureResponderEvent, StyleSheet } from 'react-native';
+import * as yup from 'yup';
+
+const validationSchema = yup.object().shape({
+  username: yup
+    .string()
+    .required('Username is required'),
+  password: yup
+    .string()
+    .required('Password is required'),
+});
 
 
 interface ValueTypes {
@@ -40,11 +50,11 @@ const onSubmit = (values: ValueTypes) => {
 const SignIn = () => {
   return (
     <View>
-      <Formik initialValues={values} onSubmit={onSubmit}>
+      <Formik initialValues={values} onSubmit={onSubmit} validationSchema={validationSchema}>
         {({ handleSubmit }) => (
           <View style={styles.container}>
-            <FormikTextInput name='Username' placeholder='Username' style={styles.input} />
-            <FormikTextInput name='Password' placeholder='Password' secureTextEntry={true} style={styles.input} />
+            <FormikTextInput name='username' placeholder='Username' style={styles.input} />
+            <FormikTextInput name='password' placeholder='Password' secureTextEntry={true} style={styles.input} />
             <Button title='Sign In' onPress={handleSubmit as (e?: GestureResponderEvent) => void} />
           </View>
         )}

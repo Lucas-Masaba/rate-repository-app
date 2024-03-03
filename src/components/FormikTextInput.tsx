@@ -18,7 +18,8 @@ interface InputTypes {
 
 const styles = StyleSheet.create({
   errorText: {
-    marginTop: 5,
+    marginTop: -10,
+    color: '#d73a4a',
   },
 });
 
