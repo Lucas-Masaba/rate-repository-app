@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
-import { RepositoriesType } from './RepositoryList';
+import { NodeType } from './RepositoryList';
 import kFormatter from '../utils/kFormatter';
 
 const styles = StyleSheet.create({
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({ item }: { item: RepositoriesType }) => {
+const RepositoryItem = ({ item }: { item: NodeType }) => {
   return (
     <View style={styles.flexContainer}>
       <Image source={{ uri: item.ownerAvatarUrl }} style={styles.imageStyle} />
