@@ -51,8 +51,7 @@ const RepositoryList = () => {
     );
   };
 
-  const repositoryNodes = repositories ? repositories.edges.map(edge => edge.node) : [];
-
+  const repositoryNodes = repositories ? repositories?.edges.map((edge: EdgesType) => edge.node) : [];
   return (
 
     <FlatList
