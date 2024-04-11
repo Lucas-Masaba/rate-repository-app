@@ -3,6 +3,7 @@ import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
 import { View, Button, GestureResponderEvent, StyleSheet } from 'react-native';
 import * as yup from 'yup';
+import useSignIn from '../hooks/useSignIn';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -15,12 +16,12 @@ const validationSchema = yup.object().shape({
 
 
 interface ValueTypes {
-  name: string;
+  username: string;
   password: string;
 }
 
 const values: ValueTypes = {
-  name: '',
+  username: '',
   password: '',
 };
 
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderColor: '#e1e4e8',
-    placeholderTextColor: '#e1e4e8',
+    // placeholderTextColor: '#e1e4e8',
     borderRadius: 5,
   },
   button: {
@@ -43,11 +44,19 @@ const styles = StyleSheet.create({
   }
 });
 
-const onSubmit = (values: ValueTypes) => {
-  console.log(values);
-};
 
 const SignIn = () => {
+  const { signIn } = useSignIn();
+  
+  const onSubmit = async (values: ValueTypes) => {
+    const { username, password } = values;
+    try {
+      const data = await signIn({ username, password });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View>
       <Formik initialValues={values} onSubmit={onSubmit} validationSchema={validationSchema}>
