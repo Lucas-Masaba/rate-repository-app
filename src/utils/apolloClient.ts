@@ -1,8 +1,32 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { APOLLO_URI } from '@env';
-const createApolloClient = () => {
+import { setContext } from '@apollo/client/link/context';
+import AuthStorage from './authStorage';
+
+const httpLink = createHttpLink({
+  uri: APOLLO_URI,
+});
+
+const createApolloClient = (authStorage: AuthStorage) => {
+  const authLink = setContext(async (_, { headers }) => {
+    try {
+      const accessToken = await authStorage.getAccessToken();
+      return {
+        headers: {
+          ...headers,
+          authorization: accessToken ? `Bearer ${accessToken}` : '',
+        },
+      };
+    } catch(e) {
+      console.log(e);
+      return {
+        headers,
+      };
+    }
+  });
+
   return new ApolloClient({
-    uri: APOLLO_URI,
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
 };
