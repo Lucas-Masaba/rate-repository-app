@@ -22,3 +22,12 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `;
+
+export const IsSignedIn = gql`
+query IsUserSignedIn {
+  me {
+    id
+    username
+  } 
+}
+`;
